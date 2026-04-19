@@ -4,7 +4,7 @@ import networkx as nx
 
 def draw_graph(graph, communities=None, name="Graph"):
 
-    # CHỈ vẽ Karate và HepTh
+    # only Karate and HepTh
     global node_size
     if name not in ["Karate", "HepTh"]:
         print(f"[SKIP] Visualization skipped for {name} (too large)")
@@ -14,13 +14,13 @@ def draw_graph(graph, communities=None, name="Graph"):
 
     plt.figure(figsize=(8, 6))
 
-    # màu theo community
+    # color  community
     if communities:
         colors = [communities[node] for node in G.nodes()]
     else:
         colors = "blue"
 
-    # 🔥 layout riêng cho từng dataset
+    #
     if name == "Karate":
         pos = nx.spring_layout(G, seed=42)  # đẹp
         node_size = 80
