@@ -2,13 +2,11 @@ import random
 
 def simulate_sir(graph, seeds, beta=0.05, gamma=0.2, steps=30):
     """
-    SIR simulation with multiple seeds (using PEAK infection)
+    SIR simulation with multiple seeds (using TOTAL infected)
     """
 
     infected = set(seeds)
     recovered = set()
-
-    peak = len(infected)  # 🔥 track peak
 
     for _ in range(steps):
 
@@ -32,11 +30,8 @@ def simulate_sir(graph, seeds, beta=0.05, gamma=0.2, steps=30):
         infected -= new_recovered
         recovered |= new_recovered
 
-        # update peak
-        if len(infected) > peak:
-            peak = len(infected)
-
         if not infected:
             break
 
-    return peak   # 🔥 KHÔNG dùng total nữa
+    # TOTAL INFECTED
+    return len(recovered)

@@ -7,25 +7,37 @@ from experiments.runtime import runtime_comparison
 from experiments.compare import compare_methods
 
 from visualization.plot import draw_graph
+from src.girvan_newman import girvan_newman_communities
+
 
 
 
 def run_dataset(name, path):
-
     print(f"\n===== DATASET: {name} =====")
 
     graph = load_graph(path)
     edges = sum(len(graph[u]) for u in graph) // 2
-    communities = louvain(graph)
-    pr = pagerank(graph)
-    Q = compute_modularity(graph, communities)
 
-    print("Modularity:", round(Q, 4))
+    # ===== Louvain =====
+    communities_louvain = louvain(graph)
+    Q_louvain = compute_modularity(graph, communities_louvain)
+
+    print("Modularity (Louvain):", round(Q_louvain, 4))
     print("Nodes:", len(graph))
     print("Edges:", edges)
-    print("Communities:", len(set(communities.values())))
+    print("Communities (Louvain):", len(set(communities_louvain.values())))
 
-    draw_graph(graph, communities, name)
+    # ===== Girvan-Newman =====
+    #
+    if name == "Karate":
+        communities_gn = girvan_newman_communities(graph, depth=2)
+        Q_gn = compute_modularity(graph, communities_gn)
+
+        print("Modularity (Girvan-Newman):", round(Q_gn, 4))
+        print("Communities (GN):", len(set(communities_gn.values())))
+
+    # ===== Visualization =====
+    #draw_graph(graph, communities_louvain, name)
 
 
 def main():
