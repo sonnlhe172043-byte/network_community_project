@@ -37,7 +37,7 @@ def run_dataset(name, path):
         print("Communities (GN):", len(set(communities_gn.values())))
 
     # ===== Visualization =====
-    #draw_graph(graph, communities_louvain, name)
+    draw_graph(graph, communities_louvain, name)
 
 
 def main():
