@@ -57,7 +57,7 @@ def run_dataset(name, path):
         if name == "Karate":
             draw_graph(graph, method="sir", values=sir_state, name=name)
 
-        # HepTh →  subgraph (QUAN TRỌNG)
+        # HepTh →  subgraph
         elif name == "HepTh":
             draw_graph(
                 graph,

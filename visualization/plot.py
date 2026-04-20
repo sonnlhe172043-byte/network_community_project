@@ -23,7 +23,7 @@ def draw_graph(graph, method=None, values=None, name="Graph",
         base_size = 80
 
     else:  # HepTh
-        # ⚡ layout nhanh hơn
+        #
         pos = nx.spring_layout(G, seed=42, iterations=15)
         base_size = 10
 
@@ -38,7 +38,7 @@ def draw_graph(graph, method=None, values=None, name="Graph",
     # ===== PAGERANK =====
     elif method == "pagerank" and values:
         colors = "skyblue"
-        # normalize tránh node quá nhỏ
+        # normalize
         max_pr = max(values.values())
         sizes = [values[node] / max_pr * 3000 for node in G.nodes()]
 
